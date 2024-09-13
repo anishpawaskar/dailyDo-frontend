@@ -3,6 +3,8 @@ import { FaCrown } from "react-icons/fa6";
 import { APP_FEATURES, USER_FEATURES } from "./sidebar.constant";
 
 export const Sidebar = () => {
+  //TODO: Add selection logic
+  //TODO: user-feature should be draggable and can change their position
   return (
     <div
       id="sidebar"
