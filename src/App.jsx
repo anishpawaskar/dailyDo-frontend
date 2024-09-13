@@ -1,9 +1,12 @@
 import "./App.css";
+import { Sidebar } from "./components/Sidebar";
 
 function App() {
   return (
     <>
-      <h1>Hello World</h1>
+      <div id="main-container" className="h-screen flex">
+        <Sidebar />
+      </div>
     </>
   );
 }
