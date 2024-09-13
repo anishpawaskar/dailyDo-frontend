@@ -101,14 +101,16 @@ export const TaskSmartListItem = ({
             isSelected && "bg-[--light-white]"
           } rounded-md flex items-center group/smart-list-item px-3 hover:bg-[--light-white] relative`}
         >
-          <span className="h-[18px] w-[18px] inline-block mr-2 text-[--text-gray-6]">
+          <span className="h-[18px] w-[18px] inline-block mr-2 text-[--text-gray-6] flex-shrink-0">
             {IconComponent}
           </span>
-          <span className="flex flex-auto text-[--text-gray]">{item.name}</span>
+          <span className="flex flex-auto text-[--text-gray] truncate">
+            {item.name}
+          </span>
           {item.name === "Inbox" && (
-            <span className="inline-block w-2 h-2 rounded-full bg-yellow-500 mr-2"></span>
+            <span className="inline-block w-2 h-2 rounded-full bg-yellow-500 mx-2 flex-shrink-0"></span>
           )}
-          <span className="relative min-w-6 text-[--text-gray-4]">
+          <span className="relative min-w-6 text-[--text-gray-4] flex-shrink-0">
             <span className="text-xs group-hover/smart-list-item:invisible">
               {item.count && item.count}
             </span>
