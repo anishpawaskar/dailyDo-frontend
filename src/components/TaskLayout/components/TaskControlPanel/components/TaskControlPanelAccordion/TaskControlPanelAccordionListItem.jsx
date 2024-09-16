@@ -11,7 +11,6 @@ export const TaskControlPanelAccordionListItem = ({
   selectedListItem,
   setSelectedListItem,
 }) => {
-  console.log("lists", lists);
   const [isAccordionListItemModalVisible, setIsAccordionListItemModalVisible] =
     useState(false);
   const [isPopupVisible, setIsPopupVisisble] = useState(false);
