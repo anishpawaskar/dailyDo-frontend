@@ -1,9 +1,12 @@
 import { useRef, useState } from "react";
 import { RxHamburgerMenu, RxDotsHorizontal } from "react-icons/rx";
 import { LuArrowUpDown } from "react-icons/lu";
+import { DashboardHeaderPopup } from "./DashboardHeaderPopup";
+import { MENU_DATA, SORT } from "./taskDashboardHeader.constant";
 
 export const TaskDashboardHeader = ({ title }) => {
   const [isInputVisible, setIsInputVisible] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState("");
   const [titleValue, setTitleValue] = useState(title);
   const titleInputRef = useRef(null);
 
@@ -36,13 +39,39 @@ export const TaskDashboardHeader = ({ title }) => {
         />
       </div>
       <div className="header-actioin flex-auto flex justify-end items-center gap-4 relative">
-        <button className="text-[--icon-color] py-1.5 px-1 rounded-md flex items-center hover:bg-[--light-white]">
+        <button
+          onClick={() => setIsPopupVisible("sortTask")}
+          className="text-[--icon-color] py-1.5 px-1 rounded-md flex items-center hover:bg-[--light-white] relative z-50"
+        >
           <LuArrowUpDown className="h-[20px] w-[20px] opacity-60" />
         </button>
-        <button className="text-[--icon-color] py-1.5 px-1 rounded-md flex items-center hover:bg-[--light-white]">
+        <button
+          onClick={() => setIsPopupVisible("taskMenu")}
+          className="text-[--icon-color] py-1.5 px-1 rounded-md flex items-center hover:bg-[--light-white] relative z-50"
+        >
           <RxDotsHorizontal className="h-[20px] w-[20px] opacity-60" />
         </button>
+        {isPopupVisible === "sortTask" && (
+          <DashboardHeaderPopup
+            key="sort popup"
+            isPopupVisible={isPopupVisible}
+            popupItems={SORT}
+          />
+        )}
+        {isPopupVisible === "taskMenu" && (
+          <DashboardHeaderPopup
+            key="task menu popup"
+            isPopupVisible={isPopupVisible}
+            popupItems={MENU_DATA}
+          />
+        )}
       </div>
+      {isPopupVisible && (
+        <div
+          onClick={() => setIsPopupVisible("")}
+          className="absolute top-0 left-0 w-full h-full"
+        ></div>
+      )}
     </header>
   );
 };

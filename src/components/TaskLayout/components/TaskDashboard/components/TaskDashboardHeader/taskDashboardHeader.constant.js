@@ -8,8 +8,8 @@ import { IoAddOutline } from "react-icons/io5";
 import { GoShare } from "react-icons/go";
 import { RiPrinterLine } from "react-icons/ri";
 
-export const SORT_MODAL = {
-  groupBy: {
+export const SORT = [
+  {
     title: "Group by",
     icon: MdOutlineComputer,
     items: [
@@ -35,7 +35,7 @@ export const SORT_MODAL = {
       },
     ],
   },
-  sortBy: {
+  {
     title: "Sort by",
     icon: BsSortDown,
     items: [
@@ -60,10 +60,11 @@ export const SORT_MODAL = {
       },
     ],
   },
-};
+];
 
 export const MENU_DATA = [
   {
+    id: 100,
     name: "View",
     items: [
       {
@@ -81,6 +82,7 @@ export const MENU_DATA = [
     ],
   },
   {
+    id: 200,
     items: [
       {
         id: 4,
@@ -100,6 +102,7 @@ export const MENU_DATA = [
     ],
   },
   {
+    id: 300,
     items: [
       {
         id: 7,
