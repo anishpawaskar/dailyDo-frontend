@@ -11,7 +11,7 @@ export const TaskDashboardHeader = ({ title }) => {
   const titleInputRef = useRef(null);
 
   return (
-    <header className="px-5 py-4 flex items-center justify-between">
+    <header className="px-5 py-4 flex items-center justify-between w-full">
       <button className="flex-none text-[--icon-color] hover:bg-[--light-white] rounded-md h-9 px-1">
         <RxHamburgerMenu className="w-[23px] h-[23px] opacity-60" />
       </button>
