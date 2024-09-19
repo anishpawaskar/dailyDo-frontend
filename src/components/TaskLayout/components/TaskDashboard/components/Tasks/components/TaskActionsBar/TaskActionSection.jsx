@@ -10,8 +10,7 @@ export const TaskActionSection = ({ title, actions }) => {
       <ul className="flex items-center justify-between">
         {actions.map((action) => {
           const IconComponent = action.icon;
-          console.log(action.level, action.color);
-
+          //TODO: add date picker when click on custom date button
           return (
             <li key={action.id} className="relative group/action">
               <div className="h-8 w-8 rounded-md bg-[--light-white] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] opacity-0 group-hover/action:opacity-100 "></div>

@@ -13,6 +13,7 @@ import { formatTaskDate } from "../../../../../../utils/formatTaskDate";
 export const TaskListItem = ({ task }) => {
   const [isTaskAccordionOpen, setIsTaskAccordionOpen] = useState(false);
   const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
+  const [isTaskActionBarVisible, setIsTaskActionBarVisible] = useState(false);
 
   const isTaskHasSubtasks = task.items?.length ? true : false;
   const isSelected = task.id === "1";
@@ -79,19 +80,25 @@ export const TaskListItem = ({ task }) => {
             <div className="absolute h-[1px] left-[40px] bottom-0 w-[94%] bg-[--text-gray] opacity-10 visible group-hover/task:invisible"></div>
           )}
           <div className="relative">
-            <button className="absolute right-[-16px] top-[50%] translate-y-[-50%]">
+            <button
+              onClick={() => setIsTaskActionBarVisible(true)}
+              className="absolute right-[-16px] top-[50%] translate-y-[-50%]"
+            >
               <HiOutlineDotsHorizontal className="h-3 w-3 text-[--light-gray] opacity-40 hidden group-hover/task:block" />
             </button>
-            {isSelected && <TaskActionsBar />}
+            {isTaskActionBarVisible && <TaskActionsBar />}
           </div>
         </div>
       </li>
       {isTaskHasSubtasks &&
         isTaskAccordionOpen &&
         task.items.map((task) => <TaskListItem task={task} key={task.id} />)}
-      {isDatePickerVisible && (
+      {(isDatePickerVisible || isTaskActionBarVisible) && (
         <div
-          onClick={() => setIsDatePickerVisible(false)}
+          onClick={() => {
+            setIsDatePickerVisible(false);
+            setIsTaskActionBarVisible(false);
+          }}
           className="w-full h-full absolute top-0 left-0 z-[100]"
         ></div>
       )}
