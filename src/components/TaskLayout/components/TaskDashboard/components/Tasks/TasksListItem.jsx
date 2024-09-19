@@ -1,0 +1,64 @@
+import React, { useState } from "react";
+import { TbStack3 } from "react-icons/tb";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import {
+  MdOutlineKeyboardArrowRight,
+  MdOutlineKeyboardArrowDown,
+} from "react-icons/md";
+
+export const TaskListItem = ({ task }) => {
+  const [isTaskAccordionOpen, setIsTaskAccordionOpen] = useState(false);
+  const isTaskHasSubtasks = task.items?.length ? true : false;
+  const isSelected = task.id === "1";
+
+  return (
+    <React.Fragment key={task.id}>
+      <li
+        style={{ marginLeft: `${task.depth * 16}px` }}
+        className="px-[26px] group/task"
+      >
+        <div
+          className={`${isTaskHasSubtasks ? "pl-1" : "pl-4"} ${
+            isSelected && "bg-[--light-white]"
+          } flex items-center justify-between h-10 hover:bg-[#F7F7F7] rounded-md relative`}
+        >
+          <TbStack3 className="text-[--light-gray] opacity-40 absolute left-[-20px] top-[50%] translate-y-[-50%] hidden group-hover/task:block h-3 w-3 cursor-move" />
+          <div className="h-full flex items-center">
+            {isTaskHasSubtasks && (
+              <button
+                onClick={() =>
+                  setIsTaskAccordionOpen((prevState) => !prevState)
+                }
+                className="text-[--text-gray] h-full group/accordionButton"
+              >
+                {isTaskAccordionOpen ? (
+                  <MdOutlineKeyboardArrowDown className="opacity-40 group-hover/accordionButton:opacity-80 transition-all" />
+                ) : (
+                  <MdOutlineKeyboardArrowRight className="opacity-40 group-hover/accordionButton:opacity-80 transition-all" />
+                )}
+              </button>
+            )}
+
+            <input
+              type="checkbox"
+              name="complete-task"
+              id="complete-task"
+              className="mr-2 h-4 w-4"
+            />
+          </div>
+          <p className="flex-auto text-sm text-[--text-gray]">{task.title}</p>
+          {!isSelected && (
+            <div className="absolute h-[1px] left-[40px] bottom-0 w-[94%] bg-[--text-gray] opacity-10 visible group-hover/task:invisible"></div>
+          )}
+
+          <button className="absolute right-[-18px] top-[50%] translate-y-[-50%]">
+            <HiOutlineDotsHorizontal className="h-3 w-3 text-[--light-gray] opacity-40 hidden group-hover/task:block" />
+          </button>
+        </div>
+      </li>
+      {isTaskHasSubtasks &&
+        isTaskAccordionOpen &&
+        task.items.map((task) => <TaskListItem task={task} key={task.id} />)}
+    </React.Fragment>
+  );
+};
