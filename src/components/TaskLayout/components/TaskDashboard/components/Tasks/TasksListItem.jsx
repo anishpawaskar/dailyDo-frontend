@@ -6,6 +6,7 @@ import {
   MdOutlineKeyboardArrowRight,
   MdOutlineKeyboardArrowDown,
 } from "react-icons/md";
+import { TaskActionsBar } from "./components/TaskActionsBar";
 import { DatePicker } from "../../../../../DatePicker";
 import { formatTaskDate } from "../../../../../../utils/formatTaskDate";
 
@@ -77,9 +78,12 @@ export const TaskListItem = ({ task }) => {
           {!isSelected && (
             <div className="absolute h-[1px] left-[40px] bottom-0 w-[94%] bg-[--text-gray] opacity-10 visible group-hover/task:invisible"></div>
           )}
-          <button className="absolute right-[-16px] top-[50%] translate-y-[-50%]">
-            <HiOutlineDotsHorizontal className="h-3 w-3 text-[--light-gray] opacity-40 hidden group-hover/task:block" />
-          </button>
+          <div className="relative">
+            <button className="absolute right-[-16px] top-[50%] translate-y-[-50%]">
+              <HiOutlineDotsHorizontal className="h-3 w-3 text-[--light-gray] opacity-40 hidden group-hover/task:block" />
+            </button>
+            {isSelected && <TaskActionsBar />}
+          </div>
         </div>
       </li>
       {isTaskHasSubtasks &&
