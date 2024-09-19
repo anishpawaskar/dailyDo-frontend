@@ -8,7 +8,7 @@ export const TaskLayout = () => {
       <div className="flex flex-auto">
         <TaskDashboard />
       </div>
-      <div className="w-1/5 h-full flex bg-red-500"></div>
+      <div className="w-1/5 min-w-80 h-full flex bg-red-500"></div>
     </div>
   );
 };

@@ -5,10 +5,13 @@ import {
   MdOutlineKeyboardArrowRight,
   MdOutlineKeyboardArrowDown,
 } from "react-icons/md";
+import { DatePicker } from "../../../../../DatePicker";
 import { formatTaskDate } from "../../../../../../utils/formatTaskDate";
 
 export const TaskListItem = ({ task }) => {
   const [isTaskAccordionOpen, setIsTaskAccordionOpen] = useState(false);
+  const [isDatePickerVisible, setIsDatePickerVisible] = useState(false);
+
   const isTaskHasSubtasks = task.items?.length ? true : false;
   const isSelected = task.id === "1";
   const dueDate = formatTaskDate(task.dueDate); //TODO: due date cross then show text red
@@ -50,10 +53,19 @@ export const TaskListItem = ({ task }) => {
           </div>
           <p className="flex-auto text-sm text-[--text-gray]">{task.title}</p>
           {task.dueDate && (
-            <div className="mr-3">
-              <button style={{ color: "#4772fa" }} className="text-xs">
+            <div className="mr-3 relative">
+              <button
+                onClick={() => setIsDatePickerVisible(true)}
+                style={{ color: "#4772fa" }}
+                className="text-xs"
+              >
                 {dueDate}
               </button>
+              {isDatePickerVisible && (
+                <div className="absolute z-[150] right-[-16px] top-5">
+                  <DatePicker dueDate={task.dueDate} />
+                </div>
+              )}
             </div>
           )}
           {!isSelected && (
@@ -67,6 +79,12 @@ export const TaskListItem = ({ task }) => {
       {isTaskHasSubtasks &&
         isTaskAccordionOpen &&
         task.items.map((task) => <TaskListItem task={task} key={task.id} />)}
+      {isDatePickerVisible && (
+        <div
+          onClick={() => setIsDatePickerVisible(false)}
+          className="w-full h-full absolute top-0 left-0 z-[100]"
+        ></div>
+      )}
     </React.Fragment>
   );
 };
