@@ -5,11 +5,13 @@ import {
   MdOutlineKeyboardArrowRight,
   MdOutlineKeyboardArrowDown,
 } from "react-icons/md";
+import { formatTaskDate } from "../../../../../../utils/formatTaskDate";
 
 export const TaskListItem = ({ task }) => {
   const [isTaskAccordionOpen, setIsTaskAccordionOpen] = useState(false);
   const isTaskHasSubtasks = task.items?.length ? true : false;
   const isSelected = task.id === "1";
+  const dueDate = formatTaskDate(task.dueDate); //TODO: due date cross then show text red
 
   return (
     <React.Fragment key={task.id}>
@@ -47,10 +49,16 @@ export const TaskListItem = ({ task }) => {
             />
           </div>
           <p className="flex-auto text-sm text-[--text-gray]">{task.title}</p>
+          {task.dueDate && (
+            <div className="mr-3">
+              <button style={{ color: "#4772fa" }} className="text-xs">
+                {dueDate}
+              </button>
+            </div>
+          )}
           {!isSelected && (
             <div className="absolute h-[1px] left-[40px] bottom-0 w-[94%] bg-[--text-gray] opacity-10 visible group-hover/task:invisible"></div>
           )}
-
           <button className="absolute right-[-18px] top-[50%] translate-y-[-50%]">
             <HiOutlineDotsHorizontal className="h-3 w-3 text-[--light-gray] opacity-40 hidden group-hover/task:block" />
           </button>
