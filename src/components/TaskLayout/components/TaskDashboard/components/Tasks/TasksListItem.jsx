@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { LuListTree } from "react-icons/lu";
 import { TbStack3 } from "react-icons/tb";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import {
@@ -27,7 +28,7 @@ export const TaskListItem = ({ task }) => {
             isSelected && "bg-[--light-white]"
           } flex items-center justify-between h-10 hover:bg-[#F7F7F7] rounded-md relative`}
         >
-          <TbStack3 className="text-[--light-gray] opacity-40 absolute left-[-20px] top-[50%] translate-y-[-50%] hidden group-hover/task:block h-3 w-3 cursor-move" />
+          <TbStack3 className="text-[--light-gray] opacity-40 absolute left-[-16px] top-[50%] translate-y-[-50%] hidden group-hover/task:block h-3 w-3 cursor-move" />
           <div className="h-full flex items-center">
             {isTaskHasSubtasks && (
               <button
@@ -52,26 +53,31 @@ export const TaskListItem = ({ task }) => {
             />
           </div>
           <p className="flex-auto text-sm text-[--text-gray]">{task.title}</p>
-          {task.dueDate && (
-            <div className="mr-3 relative">
-              <button
-                onClick={() => setIsDatePickerVisible(true)}
-                style={{ color: "#4772fa" }}
-                className="text-xs"
-              >
-                {dueDate}
-              </button>
-              {isDatePickerVisible && (
-                <div className="absolute z-[150] right-[-16px] top-5">
-                  <DatePicker dueDate={task.dueDate} />
-                </div>
-              )}
-            </div>
-          )}
+          <div className="flex items-center gap-1 mr-3">
+            {isTaskHasSubtasks && (
+              <LuListTree className="h-[14px] w-[14px] leading-5 text-[--icon-color] opacity-60" />
+            )}
+            {task.dueDate && (
+              <div className="relative">
+                <button
+                  onClick={() => setIsDatePickerVisible(true)}
+                  style={{ color: "#4772fa" }}
+                  className="text-xs"
+                >
+                  {dueDate}
+                </button>
+                {isDatePickerVisible && (
+                  <div className="absolute z-[150] right-[-16px] top-5">
+                    <DatePicker dueDate={task.dueDate} />
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
           {!isSelected && (
             <div className="absolute h-[1px] left-[40px] bottom-0 w-[94%] bg-[--text-gray] opacity-10 visible group-hover/task:invisible"></div>
           )}
-          <button className="absolute right-[-18px] top-[50%] translate-y-[-50%]">
+          <button className="absolute right-[-16px] top-[50%] translate-y-[-50%]">
             <HiOutlineDotsHorizontal className="h-3 w-3 text-[--light-gray] opacity-40 hidden group-hover/task:block" />
           </button>
         </div>
